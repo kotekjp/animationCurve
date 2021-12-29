@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+</head>
+  <script src="./js/pixi.min.js"></script>
+<body>
+  <script>
+    // Create our application instance
+    var app = new PIXI.Application({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x2c3e50
+    });
+    document.body.appendChild(app.view);
+    
+    let circle = new PIXI.Graphics()
+    .beginFill(0xffa500)
+    .drawCircle(window.innerWidth/2-100,window.innerHeight/2,30)
+    .endFill();
+    
+    app.stage.addChild(circle);
+    
+    let t = 0;
+    app.ticker.add(delta => {
+      t += 0.01;
+      const a = 100;
+      const b = 1;
+      const v = 2 * a * Math.sin(1/2 * Math.PI * b * t);
+      circle.x = v;
+      console.log(t);
+      if (t >= 1) {
+        app.ticker.stop();
+      }
+    });
+  </script>
+</body>
+</html>
